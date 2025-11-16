@@ -24,6 +24,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.3.3",
     "@digital-go-jp/tailwind-theme-plugin": "^0.3.2",
+    "@figma/rest-api-spec": "^0.34.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
