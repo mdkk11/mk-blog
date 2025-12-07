@@ -1,9 +1,17 @@
-import { cva, cx } from '@/ui/libs/cva';
 import type { VariantProps } from 'cva';
-import { useButton, useFocusRing, mergeProps, type AriaButtonProps } from 'react-aria';
-
-import { buttonLinkVariants, buttonLinkDefaults } from '@/ui/libs/buttonLinkVariants';
 import { useRef } from 'react';
+import {
+  type AriaButtonProps,
+  mergeProps,
+  useButton,
+  useFocusRing,
+} from 'react-aria';
+
+import {
+  buttonLinkDefaults,
+  buttonLinkVariants,
+} from '@/ui/libs/buttonLinkVariants';
+import { cva, cx } from '@/ui/libs/cva';
 
 const buttonVariants = cva({
   base: [
@@ -16,11 +24,14 @@ const buttonVariants = cva({
 });
 
 export type ButtonProps = React.ComponentPropsWithoutRef<'button'> &
-  VariantProps<typeof buttonVariants>
+  VariantProps<typeof buttonVariants>;
 
 const Button = (props: ButtonProps) => {
   const ref = useRef<HTMLButtonElement>(null);
-  const { buttonProps, isPressed } = useButton(props as AriaButtonProps<'button'>, ref);
+  const { buttonProps, isPressed } = useButton(
+    props as AriaButtonProps<'button'>,
+    ref,
+  );
   const { focusProps, isFocusVisible } = useFocusRing();
   const { className, variant, size, fullWidth, shadow, ...rest } = props;
 
@@ -36,7 +47,7 @@ const Button = (props: ButtonProps) => {
           fullWidth,
           shadow,
           className,
-        })
+        }),
       )}
     />
   );

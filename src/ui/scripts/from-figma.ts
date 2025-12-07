@@ -62,7 +62,7 @@ async function getImages(
   options?: {
     format?: 'jpg' | 'png' | 'svg' | 'pdf';
     scale?: number;
-  }
+  },
 ) {
   const { data, error } = await client.GET('/v1/images/{file_key}', {
     params: {
@@ -103,11 +103,14 @@ async function getComments(fileKey: string) {
 
 // 使用例6: Variables取得
 async function getLocalVariables(fileKey: string) {
-  const { data, error } = await client.GET('/v1/files/{file_key}/variables/local', {
-    params: {
-      path: { file_key: fileKey },
+  const { data, error } = await client.GET(
+    '/v1/files/{file_key}/variables/local',
+    {
+      params: {
+        path: { file_key: fileKey },
+      },
     },
-  });
+  );
 
   if (error) {
     console.error('Error:', error);
@@ -239,14 +242,16 @@ async function getCompleteStyles(fileKey: string) {
   const detailsData = await getStyleDetails(fileKey, styleNodeIds);
 
   // ステップ4: メタデータと実際の値をマージ
-  const completeStyles = Object.entries(stylesData.meta.styles).map(([id, meta]: [string, any]) => {
-    const nodeData = detailsData?.nodes?.[meta.node_id];
-    return {
-      id,
-      ...meta,
-      values: nodeData?.document, // 実際のfills, textなどの値
-    };
-  });
+  const completeStyles = Object.entries(stylesData.meta.styles).map(
+    ([id, meta]: [string, any]) => {
+      const nodeData = detailsData?.nodes?.[meta.node_id];
+      return {
+        id,
+        ...meta,
+        values: nodeData?.document, // 実際のfills, textなどの値
+      };
+    },
+  );
 
   console.log('Complete styles with values:', completeStyles);
   return completeStyles;
@@ -281,7 +286,7 @@ async function getFileStructureWithDetails(
   options?: {
     depth?: number;
     geometry?: 'paths' | 'bounds';
-  }
+  },
 ) {
   // ステップ1: ファイル全体を取得
   const { data, error } = await client.GET('/v1/files/{file_key}', {
@@ -325,7 +330,10 @@ async function getFileStructureWithDetails(
 }
 
 // 使用例16: 特定の条件に一致するノードを検索して詳細を取得
-async function findAndGetNodes(fileKey: string, predicate: (node: any) => boolean) {
+async function findAndGetNodes(
+  fileKey: string,
+  predicate: (node: any) => boolean,
+) {
   // ステップ1: ファイル全体を取得
   const fileData = await getFile(fileKey);
   if (!fileData) return null;
@@ -389,7 +397,9 @@ async function getLayerHierarchy(fileKey: string, depth: number = 10) {
       type: node.type,
       visible: node.visible,
       locked: node.locked,
-      children: node.children?.map((child: any) => formatLayer(child, level + 1)),
+      children: node.children?.map((child: any) =>
+        formatLayer(child, level + 1),
+      ),
     };
   };
 
@@ -408,7 +418,9 @@ async function getPageLayers(fileKey: string, pageName: string) {
   if (!fileData) return null;
 
   // ページを検索
-  const page = fileData.document.children?.find((child: any) => child.name === pageName);
+  const page = fileData.document.children?.find(
+    (child: any) => child.name === pageName,
+  );
 
   if (!page) {
     console.error(`Page "${pageName}" not found`);
@@ -476,7 +488,9 @@ async function getFrameLayers(fileKey: string, frameName: string) {
       type: node.type,
       level: level,
       absoluteBoundingBox: node.absoluteBoundingBox,
-      children: node.children?.map((child: any) => getLayersRecursive(child, level + 1)),
+      children: node.children?.map((child: any) =>
+        getLayersRecursive(child, level + 1),
+      ),
     };
   };
 
@@ -567,4 +581,26 @@ async function _main() {
 }
 
 // エクスポート
-export { client, getFile, getFileNodes, getImages, getComments, getLocalVariables, getProjectFiles, getTeamProjects, getTeamComponents, getFileStyles, getStyleDetails, getTeamStyles, getCompleteStyles, getFileWithNodes, getFileStructureWithDetails, findAndGetNodes, getLayerHierarchy, getPageLayers, getFrameLayers, getAllPagesAndFrames, handleApiError };
+export {
+  client,
+  getFile,
+  getFileNodes,
+  getImages,
+  getComments,
+  getLocalVariables,
+  getProjectFiles,
+  getTeamProjects,
+  getTeamComponents,
+  getFileStyles,
+  getStyleDetails,
+  getTeamStyles,
+  getCompleteStyles,
+  getFileWithNodes,
+  getFileStructureWithDetails,
+  findAndGetNodes,
+  getLayerHierarchy,
+  getPageLayers,
+  getFrameLayers,
+  getAllPagesAndFrames,
+  handleApiError,
+};

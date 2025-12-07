@@ -1,5 +1,3 @@
-
-
 const _FILE_KEY = process.env.FIGMA_FILE_KEY;
 const _SKIP_REST_API = process.argv.includes('--skip-rest-api');
 

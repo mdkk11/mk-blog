@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { ThemeProvider } from '@/ui/shared/theme-privider';
 import { DefaultLayout } from '@/ui/shared/default-layout';
+import { ThemeProvider } from '@/ui/shared/theme-privider';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -14,17 +14,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" suppressHydrationWarning>
+    <html lang='ja' suppressHydrationWarning>
       <body
-        className="antialiased"
+        className='antialiased'
         style={{
           fontFamily:
             '"Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", Meiryo, "游ゴシック", YuGothic, sans-serif',
         }}
       >
         <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
+          attribute='class'
+          defaultTheme='system'
           enableSystem
           disableTransitionOnChange
         >
