@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import type React from 'react';
 import type { Story } from '../types';
 import { MarkdownRenderer } from './MarkdownRenderer';
@@ -10,7 +11,7 @@ export const StoryContent: React.FC<StoryContentProps> = ({ story }) => {
   return (
     <div className='relative w-full h-full'>
       {story.type === 'image' ? (
-        <img
+        <Image
           src={story.content}
           alt='story'
           className='w-full h-full object-cover'

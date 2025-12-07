@@ -32,11 +32,12 @@ const Button = (props: ButtonProps) => {
     props as AriaButtonProps<'button'>,
     ref,
   );
-  const { focusProps, isFocusVisible } = useFocusRing();
+  const { focusProps } = useFocusRing();
   const { className, variant, size, fullWidth, shadow, ...rest } = props;
 
   return (
     <button
+      type='button'
       ref={ref}
       {...mergeProps(buttonProps, focusProps, rest)}
       data-pressed={isPressed || undefined}

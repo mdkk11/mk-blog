@@ -36,6 +36,7 @@ export const MarkdownRenderer: React.FC<{ content: string }> = ({
   return (
     <div
       className='prose prose-invert max-w-none p-6 text-white'
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: false positive
       dangerouslySetInnerHTML={{ __html: parseMarkdown(content) }}
     />
   );

@@ -47,7 +47,7 @@ export const ArticleCardGrid = ({
 
   return (
     <div className={cx(gridVariants({ columns, gap }), className)}>
-      {displayedArticles.map((article, index) => (
+      {displayedArticles.map((article, _index) => (
         <ArticleCard
           key={article.id}
           {...article}

@@ -41,9 +41,9 @@ export const Footer: React.FC<FooterProps> = ({
               Navigate
             </h3>
             <ul className='space-y-2 font-mono text-sm'>
-              {leftLinks.map((link, index) => (
+              {leftLinks.map((link) => (
                 <li
-                  key={index}
+                  key={link.label}
                   className='hover:text-primary cursor-pointer transition-colors'
                 >
                   {link.href ? (
@@ -60,9 +60,9 @@ export const Footer: React.FC<FooterProps> = ({
               Connect
             </h3>
             <ul className='space-y-2 font-mono text-sm'>
-              {rightLinks.map((link, index) => (
+              {rightLinks.map((link) => (
                 <li
-                  key={index}
+                  key={link.label}
                   className='hover:text-primary cursor-pointer transition-colors'
                 >
                   {link.href ? (

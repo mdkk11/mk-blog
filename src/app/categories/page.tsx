@@ -1,6 +1,7 @@
 'use client';
 import { mockArticles } from '@/data/mockArticles';
 import { ArticleCardGrid } from '@/features/Article/components/ArticleCardGrid';
+import { Button } from '@/ui/components/Button';
 import { SectionHeader } from '@/ui/components/SectionHeader';
 
 export default function CategoriesPage() {
@@ -27,7 +28,7 @@ export default function CategoriesPage() {
       </header>
 
       {/* Filter Buttons */}
-      <section>
+      {/* <section>
         <div className='flex flex-wrap gap-3'>
           <button className='bg-primary text-white px-6 py-2 border-[2px] border-black font-mono text-sm font-bold uppercase'>
             Recent
@@ -39,10 +40,10 @@ export default function CategoriesPage() {
             Oldest
           </button>
         </div>
-      </section>
+      </section> */}
 
       {/* All Categories */}
-      <section className='space-y-8'>
+      {/* <section className='space-y-8'>
         <SectionHeader title='ALL_CATEGORIES' />
 
         <div className='grid grid-cols-2 md:grid-cols-3 gap-4'>
@@ -88,7 +89,7 @@ export default function CategoriesPage() {
             <p className='font-mono text-xs'>6 articles</p>
           </button>
         </div>
-      </section>
+      </section> */}
 
       {/* Articles in this category */}
       <section className='space-y-8'>
@@ -103,9 +104,9 @@ export default function CategoriesPage() {
         />
 
         <div className='text-center'>
-          <button className='bg-black text-white px-8 py-4 border-[3px] border-black font-mono text-sm font-bold uppercase hover:bg-primary hover:border-primary transition-colors'>
+          <Button className='bg-black text-white px-8 py-4 border-[3px] border-black font-mono text-sm font-bold uppercase hover:bg-primary hover:border-primary transition-colors'>
             Load More Articles
-          </button>
+          </Button>
         </div>
       </section>
     </main>

@@ -56,14 +56,15 @@ export const StoryPlayer: React.FC<StoryPlayerProps> = ({
     : 'relative w-full h-full';
 
   return (
+    /* biome-ignore lint/a11y/noStaticElementInteractions: background overlay click to close modal */
+    /* biome-ignore lint/a11y/useKeyWithClickEvents: background overlay click to close modal */
     <div
       className={containerClasses}
       onClick={isFullscreen ? onClose : undefined}
     >
+      {/* biome-ignore lint/a11y/noStaticElementInteractions: stop propagation for content area */}
+      {/* biome-ignore lint/a11y/useKeyWithClickEvents: stop propagation only needs mouse event */}
       <div className={contentClasses} onClick={(e) => e.stopPropagation()}>
-        {/* モバイル全画面、PCではアスペクト比固定などスタイル調整可能だが、
-                    今回はInstagram風に全画面に近いレイアウトとする */}
-
         {options.showProgressBar && (
           <StoryProgressBar
             count={storySet.stories.length}
@@ -87,6 +88,8 @@ export const StoryPlayer: React.FC<StoryPlayerProps> = ({
             <div className='flex items-center gap-4 pointer-events-auto'>
               {options.autoPlay && (
                 <button
+                  type='button'
+                  aria-label='Toggle play/pause'
                   onClick={(e) => {
                     e.stopPropagation(); // Prevent navigation
                     togglePause();
@@ -101,6 +104,7 @@ export const StoryPlayer: React.FC<StoryPlayerProps> = ({
                       viewBox='0 0 24 24'
                       fill='currentColor'
                     >
+                      <title>Play</title>
                       <path d='M8 5v14l11-7z' />
                     </svg>
                   ) : (
@@ -111,12 +115,14 @@ export const StoryPlayer: React.FC<StoryPlayerProps> = ({
                       viewBox='0 0 24 24'
                       fill='currentColor'
                     >
+                      <title>Pause</title>
                       <path d='M6 19h4V5H6v14zm8-14v14h4V5h-4z' />
                     </svg>
                   )}
                 </button>
               )}
               <button
+                type='button'
                 onClick={(e) => {
                   e.stopPropagation();
                   onClose();
@@ -135,6 +141,7 @@ export const StoryPlayer: React.FC<StoryPlayerProps> = ({
                   strokeLinecap='round'
                   strokeLinejoin='round'
                 >
+                  <title>Close</title>
                   <line x1='18' y1='6' x2='6' y2='18'></line>
                   <line x1='6' y1='6' x2='18' y2='18'></line>
                 </svg>
@@ -148,12 +155,14 @@ export const StoryPlayer: React.FC<StoryPlayerProps> = ({
         {/* タップエリア (ナビゲーション) */}
         <div className='absolute inset-0 z-10 flex'>
           <button
+            type='button'
             className='flex-1 h-full cursor-pointer outline-none focus:bg-white/5 transition-colors'
             onClick={prev}
             aria-label='Previous story'
             title='Previous'
           />
           <button
+            type='button'
             className='flex-[2] h-full cursor-pointer outline-none focus:bg-white/5 transition-colors' // 中央タップでポーズなどの拡張余地あり
             onClick={() => {
               // 中央タップでもNextの挙動にする場合が多いが、

@@ -91,6 +91,7 @@ export async function getCompleteStyles(fileKey: string) {
   if (!stylesData?.meta?.styles) return null;
 
   const styleNodeIds = Object.values(stylesData.meta.styles)
+    /* biome-ignore lint/suspicious/noExplicitAny: type.biomelint/suspicious/noExplicitAny */
     .map((style: any) => style.node_id)
     .filter(Boolean);
 
@@ -100,6 +101,7 @@ export async function getCompleteStyles(fileKey: string) {
   const detailsData = await getStyleDetails(fileKey, styleNodeIds);
 
   const completeStyles = Object.entries(stylesData.meta.styles).map(
+    /* biome-ignore lint/suspicious/noExplicitAny: type.biomelint/suspicious/noExplicitAny */
     ([id, meta]: [string, any]) => {
       const nodeData = detailsData?.nodes?.[meta.node_id];
       return {

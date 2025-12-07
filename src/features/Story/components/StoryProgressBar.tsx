@@ -17,7 +17,8 @@ export const StoryProgressBar: React.FC<StoryProgressBarProps> = ({
     <div className='absolute top-0 left-0 right-0 flex gap-1 p-2 z-30'>
       {Array.from({ length: count }).map((_, index) => (
         <button
-          key={index}
+          type='button'
+          key={`progress-${count}`}
           className='relative flex-1 h-0.5 bg-white/30 rounded-full overflow-hidden cursor-pointer hover:h-1 transition-all'
           onClick={(e) => {
             e.stopPropagation();
