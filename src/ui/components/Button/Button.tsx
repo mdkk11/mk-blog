@@ -16,24 +16,32 @@ import { cva, cx } from '@/ui/libs/cva';
 const buttonVariants = cva({
   base: [
     'uppercase transition-all relative',
-    'disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none',
+    'data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed data-[disabled]:pointer-events-none',
     'focus:outline-none',
   ],
   variants: buttonLinkVariants,
   defaultVariants: buttonLinkDefaults,
 });
 
-export type ButtonProps = React.ComponentPropsWithoutRef<'button'> &
-  VariantProps<typeof buttonVariants>;
+export type ButtonProps = AriaButtonProps<'button'> &
+  VariantProps<typeof buttonVariants> & {
+    className?: string;
+  };
 
 const Button = (props: ButtonProps) => {
   const ref = useRef<HTMLButtonElement>(null);
-  const { buttonProps, isPressed } = useButton(
-    props as AriaButtonProps<'button'>,
-    ref,
-  );
+  const { buttonProps, isPressed } = useButton(props, ref);
   const { focusProps } = useFocusRing();
-  const { className, variant, size, fullWidth, shadow, ...rest } = props;
+  const {
+    className,
+    variant,
+    size,
+    fullWidth,
+    shadow,
+    interactive,
+    isDisabled,
+    ...rest
+  } = props;
 
   return (
     <button
@@ -41,12 +49,14 @@ const Button = (props: ButtonProps) => {
       ref={ref}
       {...mergeProps(buttonProps, focusProps, rest)}
       data-pressed={isPressed || undefined}
+      data-disabled={isDisabled || undefined}
       className={cx(
         buttonVariants({
           variant,
           size,
           fullWidth,
           shadow,
+          interactive,
           className,
         }),
       )}

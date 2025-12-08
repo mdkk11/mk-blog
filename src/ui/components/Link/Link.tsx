@@ -44,6 +44,7 @@ const Link = (props: LinkProps) => {
     size,
     fullWidth,
     shadow,
+    interactive,
     children,
     href,
     ...rest
@@ -59,7 +60,14 @@ const Link = (props: LinkProps) => {
         ref={ref}
         {...linkProps}
         className={cx(
-          linkVariants({ variant, size, fullWidth, shadow, className }),
+          linkVariants({
+            variant,
+            size,
+            fullWidth,
+            shadow,
+            interactive,
+            className,
+          }),
         )}
       >
         {children}
@@ -73,7 +81,14 @@ const Link = (props: LinkProps) => {
       ref={ref}
       {...linkProps}
       className={cx(
-        linkVariants({ variant, size, fullWidth, shadow, className }),
+        linkVariants({
+          variant,
+          size,
+          fullWidth,
+          shadow,
+          interactive,
+          className,
+        }),
       )}
     >
       {children}
