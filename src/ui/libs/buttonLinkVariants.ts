@@ -3,14 +3,14 @@
  * Used by both Button and Link components
  */
 
+import { interactiveVariants, shadowVariants } from './shadowStyles';
+
 export const buttonLinkVariants = {
   variant: {
     primary: [
-      'bg-primary text-white border-1 border-white',
-      'shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]',
-      'hover:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)]',
-      'pressed:shadow-none pressed:translate-x-1 pressed:translate-y-1',
-      'disabled:shadow-none disabled:translate-x-0 disabled:translate-y-0',
+      'bg-primary text-white border-2 border-black',
+      'hover:bg-black hover:text-white',
+      'pressed:bg-black pressed:text-white',
     ],
     // Inverted black button/link
     secondary: [
@@ -47,15 +47,8 @@ export const buttonLinkVariants = {
     true: 'w-full',
     false: '',
   },
-  shadow: {
-    none: '',
-    sm: 'shadow-[2px_2px_0_0_#000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[1px_1px_0_0_#000]',
-    md: 'shadow-[4px_4px_0_0_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_0_#000]',
-    lg: 'shadow-[8px_8px_0_0_#000] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0_0_#000]',
-    left: 'shadow-[-4px_4px_0_0_#000] active:translate-x-[-2px] active:translate-y-[2px] active:shadow-[-2px_2px_0_0_#000]',
-    white:
-      'shadow-[4px_4px_0_0_#fff] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_0_#fff]',
-  },
+  shadow: shadowVariants,
+  interactive: interactiveVariants,
 } as const;
 
 export const buttonLinkDefaults = {
@@ -63,4 +56,5 @@ export const buttonLinkDefaults = {
   size: 'md',
   fullWidth: false,
   shadow: 'none',
+  interactive: false,
 } as const;

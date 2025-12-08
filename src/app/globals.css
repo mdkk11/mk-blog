@@ -96,6 +96,13 @@
 
   --radius: 0rem;
   --tracking-normal: 0;
+
+  /* Brutalist Shadow System */
+  --shadow-color: #000000;
+  --shadow-color-light: #ffffff;
+  --shadow-offset-sm: 2px;
+  --shadow-offset-md: 4px;
+  --shadow-offset-lg: 8px;
 }
 
 /* Dark mode - Brutalist dark theme */
@@ -131,10 +138,59 @@
   --chart-3: #888888;
   --chart-4: #444444;
   --chart-5: #cccccc;
+
+  /* Dark mode shadows - inverted */
+  --shadow-color: #ffffff;
+  --shadow-color-light: #000000;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+}
+
+/* Brutalist Shadow Utility Classes */
+@layer utilities {
+  /* Base shadow classes - use with direction modifiers */
+  .shadow-brutal-sm {
+    box-shadow: var(--shadow-offset-sm) var(--shadow-offset-sm) 0 0
+      var(--shadow-color);
+  }
+  .shadow-brutal-md {
+    box-shadow: var(--shadow-offset-md) var(--shadow-offset-md) 0 0
+      var(--shadow-color);
+  }
+  .shadow-brutal-lg {
+    box-shadow: var(--shadow-offset-lg) var(--shadow-offset-lg) 0 0
+      var(--shadow-color);
+  }
+
+  /* Left direction variants */
+  .shadow-brutal-left-sm {
+    box-shadow: calc(var(--shadow-offset-sm) * -1) var(--shadow-offset-sm) 0 0
+      var(--shadow-color);
+  }
+  .shadow-brutal-left-md {
+    box-shadow: calc(var(--shadow-offset-md) * -1) var(--shadow-offset-md) 0 0
+      var(--shadow-color);
+  }
+  .shadow-brutal-left-lg {
+    box-shadow: calc(var(--shadow-offset-lg) * -1) var(--shadow-offset-lg) 0 0
+      var(--shadow-color);
+  }
+
+  /* Light/White shadow variants (for dark backgrounds) */
+  .shadow-brutal-light-sm {
+    box-shadow: var(--shadow-offset-sm) var(--shadow-offset-sm) 0 0
+      var(--shadow-color-light);
+  }
+  .shadow-brutal-light-md {
+    box-shadow: var(--shadow-offset-md) var(--shadow-offset-md) 0 0
+      var(--shadow-color-light);
+  }
+  .shadow-brutal-light-lg {
+    box-shadow: var(--shadow-offset-lg) var(--shadow-offset-lg) 0 0
+      var(--shadow-color-light);
+  }
 }
