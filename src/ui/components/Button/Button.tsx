@@ -1,17 +1,16 @@
 import type { VariantProps } from 'cva';
-import { useRef } from 'react';
-import {
-  type AriaButtonProps,
-  mergeProps,
-  useButton,
-  useFocusRing,
-} from 'react-aria';
 
+import {
+  composeRenderProps,
+  Button as RACButton,
+  type ButtonProps as RACButtonProps,
+} from 'react-aria-components';
+import { ProgressCircle } from '@/ui/components/ProgressCircle';
 import {
   buttonLinkDefaults,
   buttonLinkVariants,
 } from '@/ui/libs/buttonLinkVariants';
-import { cva, cx } from '@/ui/libs/cva';
+import { cva, cx, focusRing } from '@/ui/libs/cva';
 
 const buttonVariants = cva({
   base: [
@@ -23,44 +22,37 @@ const buttonVariants = cva({
   defaultVariants: buttonLinkDefaults,
 });
 
-export type ButtonProps = AriaButtonProps<'button'> &
+export type ButtonProps = RACButtonProps &
   VariantProps<typeof buttonVariants> & {
     className?: string;
   };
 
 const Button = (props: ButtonProps) => {
-  const ref = useRef<HTMLButtonElement>(null);
-  const { buttonProps, isPressed } = useButton(props, ref);
-  const { focusProps } = useFocusRing();
-  const {
-    className,
-    variant,
-    size,
-    fullWidth,
-    shadow,
-    interactive,
-    isDisabled,
-    ...rest
-  } = props;
-
   return (
-    <button
-      type='button'
-      ref={ref}
-      {...mergeProps(buttonProps, focusProps, rest)}
-      data-pressed={isPressed || undefined}
-      data-disabled={isDisabled || undefined}
-      className={cx(
+    <RACButton
+      {...props}
+      className={composeRenderProps(props.className, (className, renderProps) =>
         buttonVariants({
-          variant,
-          size,
-          fullWidth,
-          shadow,
-          interactive,
-          className,
+          ...renderProps,
+          variant: props.variant,
+          size: props.size,
+          fullWidth: props.fullWidth,
+          shadow: props.shadow,
+          interactive: props.interactive,
+          className: cx(focusRing(renderProps), className),
         }),
       )}
-    />
+      data-variant={props.variant}
+    >
+      {composeRenderProps(props.children, (children, { isPending }) => (
+        <>
+          {!isPending && children}
+          {isPending && (
+            <ProgressCircle aria-label='Loading...' isIndeterminate />
+          )}
+        </>
+      ))}
+    </RACButton>
   );
 };
 
